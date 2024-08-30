@@ -26,7 +26,7 @@ int count;  // attempt counter
 class Fish_Exception: public std::exception
 {
 public:
-    const char* what() const noexcept override
+    [[nodiscard]] const char* what() const noexcept override
     {
         return "A fish has been caught.";
     }
@@ -36,7 +36,7 @@ public:
 class Boot_Exception: public std::exception
 {
 public:
-    const char* what() const noexcept override
+    [[nodiscard]] const char* what() const noexcept override
     {
         return "The boot is caught.";
     }
@@ -46,7 +46,7 @@ public:
 class Nothing_Exception: public std::exception
 {
 public:
-    const char* what() const noexcept override
+    [[nodiscard]] const char* what() const noexcept override
     {
         return "Nothing is caught.";
     }
@@ -128,9 +128,9 @@ void game_init()
 void game_step(const int inIndex)
 {
     switch(field[inIndex]) {
-        case NONE: throw Nothing_Exception(); break;
-        case FISH: throw Fish_Exception(); break;
-        case BOOT: throw Boot_Exception(); break;
+        case NONE: throw Nothing_Exception();
+        case FISH: throw Fish_Exception();
+        case BOOT: throw Boot_Exception();
         default: throw std::runtime_error("An error occurred during the execution of the program.");
     }
 }
